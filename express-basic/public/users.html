@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Data Users</title>
+  <style>
+    table { border-collapse: collapse; width: 50%; margin: 20px auto; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center;">Data Users</h1>
+  <table id="usersTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Baris data akan ditambahkan di sini -->
+    </tbody>
+  </table>
+  
+  <script>
+    // Mengambil data dari endpoint API dan menampilkan ke tabel
+    fetch('/api/users')
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.querySelector('#usersTable tbody');
+        data.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${user.id}</td><td>${user.name}</td><td>${user.email}</td>`;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(err => console.error('Error:', err));
+  </script>
+</body>
+</html>
+
